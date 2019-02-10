@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -7,6 +9,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+def pre_save_category_slug(sender, instance, *args, **kwargs):
+    """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
+    if not instance.slug:
+        slug = slugify(instance.name)
+        instance.slug = slug
+
+pre_save.connect(pre_save_category_slug, sender=Category)
 
 
 def image_folder(instance, filename):
@@ -24,3 +35,12 @@ class Link(models.Model):
 
     def __str__(self):
         return self.title
+
+
+def pre_save_link_slug(sender, instance, *args, **kwargs):
+    """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
+    if not instance.slug:
+        slug = slugify(instance.title)
+        instance.slug = slug
+
+pre_save.connect(pre_save_link_slug, sender=Link)
