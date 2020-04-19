@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'Linktosite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'linktosite',
-        'USER': 'postgres',
+        'NAME': 'django_movie',
+        'USER': 'django_movie',
         'PASSWORD': '123456',
-        'HOST': '',  # Set to empty string for localhost.
-        'PORT': '',  # Set to empty string for default.
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block panelform %}
+
+    <div class="form_field">
+        <a href="{% url 'main_view' %}" class="form_field__close"><div class="close"></div></a>
+        <form class="form_field__items" action="{% url 'new_link_view' %}" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button name="submit">Добавить ресурс</button>
+        </form>
+        <p class="form_field__text">Для добавления категорий или для удаления существующих ссылок необходимо возпользоваться админимтративной панелью Django</p>
+    </div>
+
+{% endblock panelform %}

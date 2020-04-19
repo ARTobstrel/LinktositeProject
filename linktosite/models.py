@@ -1,9 +1,11 @@
 from django.db import models
 from django.db.models.signals import pre_save
-from django.utils.text import slugify
+# from django.utils.text import slugify
+from pytils.translit import slugify
 
 
 class Category(models.Model):
+    """Модель категорий"""
     name = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
 
@@ -27,11 +29,12 @@ def image_folder(instance, filename):
 
 
 class Link(models.Model):
+    """Модель ссыллок. Каждая ссылка имеет свою категорию"""
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
     link = models.CharField(max_length=100)
-    image = models.ImageField(upload_to=image_folder)
+    image = models.ImageField(blank=True, upload_to=image_folder)
 
     def __str__(self):
         return self.title
