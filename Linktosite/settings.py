@@ -92,7 +92,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static_in_dev')
     # из этой папки статические файлы будут попадать в нашу корневую папку со статикой
 ]
 
@@ -108,8 +108,10 @@ if os.getcwd() == '/app':
 
     ALLOWED_HOSTS = ['*']
 
+    DEBUG = False
+
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
+    STATIC_ROOT = 'static'
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'static_in_dev'),
     )
