@@ -86,13 +86,13 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # в этой папке будут храниться все наши статические файлы
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # в этой папке будут храниться все наши статические файлы
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static_in_dev')
     # из этой папки статические файлы будут попадать в нашу корневую папку со статикой
 ]
 
@@ -113,5 +113,5 @@ if os.getcwd() == '/app':
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'static_in_dev'),
     )
