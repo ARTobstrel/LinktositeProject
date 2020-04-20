@@ -36,7 +36,9 @@
 ehthumbs.db
 Thumbs.db
 
+
 .idea/
 static_in_dev/
 venv/
 media/
+__pycache__/
