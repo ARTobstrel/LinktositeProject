@@ -2,7 +2,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'sd0z6u1((n9-l%peqnhgj7!z-*!xw^=chzt!0@k@yg2e5jktpd'
+# SECRET_KEY = 'sd0z6u1((n9-l%peqnhgj7!z-*!xw^=chzt!0@k@yg2e5jktpd'
+SECRET_KEY = os.environ('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
@@ -20,6 +21,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
