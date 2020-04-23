@@ -86,7 +86,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # в этой папке будут храниться все наши статические файлы
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # в этой папке будут храниться все наши статические файлы
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -99,6 +99,7 @@ STATICFILES_DIRS = [
 # Настройки для Heroku
 if os.getcwd() == '/app':
     import dj_database_url
+
     DATABASES = {
         'default': dj_database_url.config(default='postgres://localhost')
     }

@@ -50,6 +50,37 @@ body, html {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
+/*крестик*/
+.form_field__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    outline: none;
+}
+.close {
+    cursor: pointer;
+}
+.close:before,
+.close:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: #483D8B;
+}
+.close:before {
+    webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.close:after {
+    webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
 .form_field__items label {
     display: inline;
     margin-right: 10px;
@@ -76,6 +107,8 @@ body, html {
     margin-top: 10px;
     font-size: 10px;
 }
+
+
 
 #main-frame {
     display: flex;
