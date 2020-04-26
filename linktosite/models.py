@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.signals import pre_save
-# from django.utils.text import slugify
 from pytils.translit import slugify
 
 
@@ -18,6 +17,7 @@ def pre_save_category_slug(sender, instance, *args, **kwargs):
     if not instance.slug:
         slug = slugify(instance.name)
         instance.slug = slug
+
 
 pre_save.connect(pre_save_category_slug, sender=Category)
 
@@ -45,5 +45,6 @@ def pre_save_link_slug(sender, instance, *args, **kwargs):
     if not instance.slug:
         slug = slugify(instance.title)
         instance.slug = slug
+
 
 pre_save.connect(pre_save_link_slug, sender=Link)
