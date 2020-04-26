@@ -2,8 +2,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'sd0z6u1((n9-l%peqnhgj7!z-*!xw^=chzt!0@k@yg2e5jktpd'
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+# SECRET_KEY = 'sd0z6u1((n9-l%peqnhgj7!z-*!xw^=chzt!0@k@yg2e5jktpd'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
@@ -109,12 +109,6 @@ if os.getcwd() == '/app':
     # Поддержка заголовков
     SECURE_PROXY_SS_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['https://link-to-site.herokuapp.com/']
 
     DEBUG = False
-
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # STATIC_ROOT = 'staticfiles'
-    # STATICFILES_DIRS = (
-    #     os.path.join(BASE_DIR, 'static_in_dev'),
-    # )

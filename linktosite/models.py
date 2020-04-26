@@ -13,6 +13,8 @@ class Category(models.Model):
 
 
 def pre_save_category_slug(sender, instance, *args, **kwargs):
+    instance.name = instance.name.title()
+
     """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
     if not instance.slug:
         slug = slugify(instance.name)
