@@ -109,6 +109,6 @@ if os.getcwd() == '/app':
     # Поддержка заголовков
     SECURE_PROXY_SS_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['https://link-to-site.herokuapp.com/']
+    ALLOWED_HOSTS = ['link-to-site.herokuapp.com']
 
     DEBUG = False
