@@ -43,6 +43,8 @@ class Link(models.Model):
 
 
 def pre_save_link_slug(sender, instance, *args, **kwargs):
+    instance.title = instance.title.title()
+
     """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
     if not instance.slug:
         slug = slugify(instance.title)
