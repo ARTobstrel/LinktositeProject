@@ -22,7 +22,7 @@
             <div class="cat-title">{{ category.name }}</div>
             {% for link in links %}
                 {% if link.category.id == category.id %}
-                    <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}<img src="{{ link.image }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
+                    <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}<img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
                 {% endif %}
             {% endfor %}
         </div>
