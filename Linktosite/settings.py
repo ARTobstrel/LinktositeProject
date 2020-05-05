@@ -21,7 +21,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,12 +53,14 @@ WSGI_APPLICATION = 'Linktosite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_movie',
-        'USER': 'django_movie',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'django_movie.sqlite3'
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'django_movie',
+        # 'USER': 'django_movie',
+        # 'PASSWORD': '123456',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
     }
 }
 
@@ -100,16 +101,16 @@ STATICFILES_DIRS = [
 ]
 
 # Настройки для Heroku
-if os.getcwd() == '/app':
-    import dj_database_url
-
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-
-    # Поддержка заголовков
-    SECURE_PROXY_SS_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    ALLOWED_HOSTS = ['link-to-site.herokuapp.com']
-
-    DEBUG = False
+# if os.getcwd() == '/app':
+#     import dj_database_url
+#
+#     DATABASES = {
+#         'default': dj_database_url.config(default='postgres://localhost')
+#     }
+#
+#     # Поддержка заголовков
+#     SECURE_PROXY_SS_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#
+#     ALLOWED_HOSTS = ['link-to-site.herokuapp.com']
+#
+#     DEBUG = False
