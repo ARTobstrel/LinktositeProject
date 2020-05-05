@@ -36,6 +36,7 @@ class Link(models.Model):
     title = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
     link = models.CharField(max_length=100)
+    # image = models.CharField(max_length=200)
     image = models.ImageField(blank=True, upload_to=image_folder)
 
     def __str__(self):
@@ -43,8 +44,6 @@ class Link(models.Model):
 
 
 def pre_save_link_slug(sender, instance, *args, **kwargs):
-    instance.title = instance.title.title()
-
     """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
     if not instance.slug:
         slug = slugify(instance.title)
