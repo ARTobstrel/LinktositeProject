@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>LinkToSite</title>
-    <link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
+    <link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
@@ -12,18 +12,14 @@
     <div><a href="{% url 'new_link_view' %}"><h1 class="title">LinkToSite</h1></a></div>
 </header>
 
-{#<div><a href="{% url 'new_link_view' %}"><button>New link</button></a></div>#}
-
 <div id="main-frame">
 
     {% for category in categories %}
         <div class="cat-frame">
-{#            убрать захардкоженность#}
             <div class="cat-title">{{ category.name }}</div>
-            {% for link in links %}
-                {% if link.category.id == category.id %}
-                    <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}<img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
-                {% endif %}
+            {% for link in category.link_set.all %}
+                <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}
+                    <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
             {% endfor %}
         </div>
     {% endfor %}
@@ -34,7 +30,7 @@
 {% endblock panelform %}
 
 <div class="version">
-    <a href="{% url 'admin:index' %}">ver. 2.02</a>
+    <a href="{% url 'admin:index' %}">ver. 2.03</a>
 </div>
 
 <details id="author">

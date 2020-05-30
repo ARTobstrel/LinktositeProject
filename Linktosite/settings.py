@@ -53,14 +53,14 @@ WSGI_APPLICATION = 'Linktosite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'django_movie.sqlite3'
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'django_movie',
-        # 'USER': 'django_movie',
-        # 'PASSWORD': '123456',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': 'django_movie.sqlite3'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_movie',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

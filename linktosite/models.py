@@ -11,6 +11,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
 
 def pre_save_category_slug(sender, instance, *args, **kwargs):
     instance.name = instance.name.title()
@@ -36,11 +40,14 @@ class Link(models.Model):
     title = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
     link = models.CharField(max_length=100)
-    # image = models.CharField(max_length=200)
     image = models.ImageField(blank=True, upload_to=image_folder)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Link"
+        verbose_name_plural = "Links"
 
 
 def pre_save_link_slug(sender, instance, *args, **kwargs):
