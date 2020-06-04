@@ -14,7 +14,7 @@
 
 <div id="main-frame">
 
-    {% for category in categories %}
+    {% for category in category_list %}
         <div class="cat-frame">
             <div class="cat-title">{{ category.name }}</div>
             {% for link in category.link_set.all %}

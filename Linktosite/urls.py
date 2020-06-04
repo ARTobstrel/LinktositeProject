@@ -3,12 +3,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from linktosite.views import main_view, new_link_view
+from linktosite.views import New_link_view, MainView
 
 urlpatterns = [
     path('admin_panel/', admin.site.urls, name='admin'),
-    path('', main_view, name='main_view'),
-    path('new_link/', new_link_view, name='new_link_view')
+    path('', MainView.as_view(), name='main_view'),
+    path('new_link/', New_link_view.as_view(), name='new_link_view')
 ]
 
 if settings.DEBUG:

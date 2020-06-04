@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.pyc
 
 # Packages #
 ############
@@ -39,6 +40,6 @@ Thumbs.db
 
 .idea/
 venv/
-#media/
+media/*
 /*/__pycache__/
 __pycache__/
