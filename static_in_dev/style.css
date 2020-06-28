@@ -16,6 +16,7 @@ button:active,
 button:focus {
   outline: none;
 }
+
 button::-moz-focus-inner {
   border: 0;
 }
@@ -63,9 +64,11 @@ html {
   height: 24px;
   outline: none;
 }
+
 .close {
   cursor: pointer;
 }
+
 .close:before,
 .close:after {
   content: "";
@@ -76,10 +79,12 @@ html {
   height: 2px;
   background: #483d8b;
 }
+
 .close:before {
   webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
 .close:after {
   webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
@@ -124,6 +129,11 @@ select {
   font-size: 10px;
 }
 
+.form_field__add_category {
+  background-color: inherit;
+  /* text-shadow: none; */
+}
+
 #main-frame {
   display: flex;
   flex-wrap: wrap;
@@ -144,8 +154,10 @@ select {
   height: auto;
   display: flex;
   align-items: center;
-  justify-content: center; /*выравнивание по центру*/
-  flex-wrap: wrap; /*элемены переходят на новую строку*/
+  justify-content: center;
+  /*выравнивание по центру*/
+  flex-wrap: wrap;
+  /*элемены переходят на новую строку*/
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
