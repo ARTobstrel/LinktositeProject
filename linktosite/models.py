@@ -1,12 +1,14 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from pytils.translit import slugify
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
     """Модель категорий"""
     name = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -58,3 +60,27 @@ def pre_save_link_slug(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_link_slug, sender=Link)
+
+
+class UnauthorizedUserLink(models.Model):
+    title = models.CharField('Name', max_length=25)
+    slug = models.SlugField(blank=True)
+    link = models.CharField(max_length=100)
+    image = models.ImageField('Image url', blank=True, upload_to=image_folder)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "UnauthorizedUserLink"
+        verbose_name_plural = "UnauthorizedUserLinks"
+
+
+def pre_save_Unlink_slug(sender, instance, *args, **kwargs):
+    """Эта функция автоматически генерирует slug нашего создаваемого объеката, если он отсутствует"""
+    if not instance.slug:
+        slug = slugify(instance.title)
+        instance.slug = slug
+
+
+pre_save.connect(pre_save_Unlink_slug, sender=UnauthorizedUserLink)

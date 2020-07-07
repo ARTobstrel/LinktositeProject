@@ -1,5 +1,5 @@
 from django.contrib import admin
-from linktosite.models import Category, Link
+from linktosite.models import Category, Link, UnauthorizedUserLink
 from django.utils.safestring import mark_safe
 
 
@@ -27,6 +27,18 @@ class LinkAdmin(admin.ModelAdmin):
     list_display_links = ('title',)
     list_filter = ('category',)
     search_fields = ('title', 'category__name')
+    readonly_fields = ('get_image',)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="48"')
+
+    get_image.short_description = 'Image'
+
+
+@admin.register(UnauthorizedUserLink)
+class UnauthorizedUserLinkAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'slug', 'link', 'get_image')
+    list_display_links = ('title',)
     readonly_fields = ('get_image',)
 
     def get_image(self, obj):

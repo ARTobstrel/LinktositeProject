@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='main_frame'>
+    {% if user.is_authenticated %}
+        {% if category_list %}
+            {% for category in category_list %}
+                <div class="cat-frame">
+                    <div class="cat-title">{{ category.name }}</div>
+                    {% for link in category.link_set.all %}
+                        <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}
+                            <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class='form_field'>
+                <p >У вас еще нет ни одной категории. Для создания категории нажмите <a class='link_to_next' href='{% url 'new_category_view' %}'>здесь.</a></p>
+            </div>
+        {% endif %}
+    {% else %}
+            <div class="cat-frame">
+                <div class="cat-title">Useful links</div>
+                {% for link in un_link %}
+                    <div class="reffer"><a href="{{ link.link }}" target="_blank">{% if link.image %}
+                        <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
+                {% endfor %} 
+            </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="form_field">
+        <a href="{% url 'main_view' %}" class="form_field__close"><div class="close"></div></a>
+        <form class="form_field__items" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button name="submit" class="form_field__btn">Авторизация</button>
+            <input type='hidden' name='next' value='{% url "main_view" %}'>
+        </form>
+    </div>
+
+{% endblock content %}

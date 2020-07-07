@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'linktosite.apps.LinktositeConfig',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -33,8 +34,7 @@ ROOT_URLCONF = 'Linktosite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,7 +90,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # в этой папке будут храниться все наши статические файлы
+# в этой папке будут храниться все наши статические файлы
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -100,17 +101,4 @@ STATICFILES_DIRS = [
     # из этой папки статические файлы будут попадать в нашу корневую папку со статикой
 ]
 
-# Настройки для Heroku
-# if os.getcwd() == '/app':
-#     import dj_database_url
-#
-#     DATABASES = {
-#         'default': dj_database_url.config(default='postgres://localhost')
-#     }
-#
-#     # Поддержка заголовков
-#     SECURE_PROXY_SS_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#
-#     ALLOWED_HOSTS = ['link-to-site.herokuapp.com']
-#
-#     DEBUG = False
+LOGIN_URL = '/users/login/'
