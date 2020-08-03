@@ -1,5 +1,5 @@
 from django.contrib import admin
-from linktosite.models import Category, Link, UnauthorizedUserLink
+from linktosite.models import Category, Link, UnauthorizedUserLink, Version
 from django.utils.safestring import mark_safe
 
 
@@ -46,6 +46,11 @@ class UnauthorizedUserLinkAdmin(admin.ModelAdmin):
 
     get_image.short_description = 'Image'
 
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('version', 'description', 'year')
+    list_display_links = ('version',)
 
 title_admin = 'LinkToSite'
 

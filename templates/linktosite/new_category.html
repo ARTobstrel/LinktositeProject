@@ -3,11 +3,15 @@
 {% block content %}
 
     <div class="form_field">
-        <a href="{% url 'new_link_view' %}" class="form_field__close"><div class="close"></div></a>
-        <form class="form_field__items" action="{% url 'new_category_view' %}" method="post" enctype="multipart/form-data" >
+        <a href="{% url 'new_link_view' %}" class="form_field__close">
+            <div class="close"></div>
+        </a>
+        <div class="form_field__category_name">Create new category</div>
+        <form class="form_field__items" action="{% url 'new_category_view' %}" method="post"
+              enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
-            <button name="submit" class="form_field__btn">Добавить категорию</button>
+            <button name="submit" class="form_field__btn">Add category</button>
         </form>
     </div>
 

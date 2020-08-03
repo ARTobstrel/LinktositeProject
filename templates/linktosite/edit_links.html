@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="form_field">
+        <a href="{% url 'main_view' %}" class="form_field__close">
+            <div class="close"></div>
+        </a>
+        <div class="form_field__category_name">{{ category.name }}</div>
+        {% for link in category.link_set.all %}
+            <div class="form_field__link">
+                <div class="link__size">
+                    <div class="link"><a href="{{ link.link }}" target="_blank">{% if link.image %}
+                        <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
+                </div>
+                <span class="rename_btn font_size14"><a href="{% url 'update_link_view' link.id %}">Edit</a></span>
+                <span class="delete_btn font_size14"><a href="{% url 'delete_link' link.id %}">Delete</a></span>
+            </div>
+        {% endfor %}
+        <div class="form_field__category_footer">
+            <a class="rename_btn font_size22" href='{% url 'rename_cat_view' category.id %}'>Rename</a>
+            <a class="delete_btn font_size22" href='{% url 'delete_cat' category.id %}'>Delete Category</a>
+        </div>
+
+    </div>
+
+{% endblock content %}

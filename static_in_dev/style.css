@@ -1,3 +1,4 @@
+/*Общие стили*/
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +29,13 @@ html {
   font-family: Ubuntu, sans-serif;
 }
 
-#header {
+/*Общие*/
+.hide_elem {
+  display: none;
+}
+
+/*Стили для базового шаблона*/
+.header {
   margin: 2% auto;
   max-width: 80%;
   font: 16px Verdana, Geneva, sans-serif;
@@ -61,6 +68,7 @@ html {
   text-align: right;
 }
 
+
 /* Поля формы */
 .form_field {
   position: fixed;
@@ -74,6 +82,7 @@ html {
   background-color: #fff2f2;
   text-shadow: 1px 1px 10px black;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 /*крестик*/
@@ -88,31 +97,6 @@ html {
 
 .form_field__error {
   color: red;
-}
-
-.close {
-  cursor: pointer;
-}
-
-.close:before,
-.close:after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 24px;
-  height: 2px;
-  background: #483d8b;
-}
-
-.close:before {
-  webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.close:after {
-  webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
 }
 
 .form_field__items {
@@ -154,11 +138,74 @@ select {
   font-size: 10px;
 }
 
-.form_field__add_category {
+.form_field__add_category:nth-child(1) {
+  display: block;
   background-color: inherit;
-  /* text-shadow: none; */
+  border: 1px solid red;
 }
 
+/*Стили для шаблона с редактированием линков*/
+.form_field__category_name {
+  font-size: 24px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.form_field__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rename_btn {
+  color: #10106d
+}
+
+.delete_btn {
+  color: #a3354b;
+}
+
+.font_size14 {
+  font-size: 14px;
+}
+
+.font_size22 {
+  font-size: 22px;
+}
+
+.form_field__category_footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.close:before,
+.close:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #483d8b;
+}
+
+.close:before {
+  /*webkit-transform: rotate(45deg);*/
+  transform: rotate(45deg);
+}
+
+.close:after {
+  /*webkit-transform: rotate(-45deg);*/
+  transform: rotate(-45deg);
+}
+
+
+/*Контейнер для линков*/
 .container {
   margin: 5% auto;
   width: 90%;
@@ -179,14 +226,15 @@ select {
   border-radius: 10px;
   position: relative;
   margin: 1%;
-  height: auto;
+  min-height: 120px;
+  min-width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /*выравнивание по центру*/
   flex-wrap: wrap;
-  /*элемены переходят на новую строку*/
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  transition: 0.5s;
 }
 
 .cat-frame:hover {
@@ -202,9 +250,10 @@ select {
   text-shadow: 1px 1px 10px black;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
   border-radius: 20px;
+  z-index: 5;
 }
 
-.reffer {
+.link {
   flex-basis: 10px;
   display: flex;
   height: auto;
@@ -212,19 +261,23 @@ select {
   transition: 0.5s;
 }
 
-.reffer:hover {
+.link:hover {
   transform: scale(1.1);
 }
 
-.reffer a {
+.link a {
   text-align: center;
   text-decoration: none;
   color: black;
   font-size: 18px;
 }
 
-.reffer a img {
+.link a img {
   width: 48px;
+}
+
+.link_del {
+  display: inline;
 }
 
 .link_to_next {
@@ -235,8 +288,17 @@ select {
   text-decoration: underline;
 }
 
+.link__size {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-#author {
+/*Подвал*/
+.author {
   position: fixed;
   bottom: 5px;
   right: 2px;
@@ -246,10 +308,11 @@ select {
   position: fixed;
   bottom: 5px;
   left: 2px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
-  #main-frame {
+  .main-frame {
     flex-direction: column;
   }
 }

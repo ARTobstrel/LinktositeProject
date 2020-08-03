@@ -1,3 +1,4 @@
+{% load version_tag %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-<header id="header">
+<header class="header">
     <div class='logo'>
         <a href="{% url 'new_link_view' %}"><h1 class="logo__name">LinkToSite</h1></a>
         <div class='logo__username'>
@@ -29,23 +30,21 @@
 </header>
 
 <div class='container'>
-{% block content %}
-{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 </div>
 
-{% block panelform %}
-{% endblock panelform %}
-
+{% get_version as ver %}
 <div class="version">
-    <a href="{% url 'admin:index' %}">ver. 2.03</a>
+    <p title="{{ ver.description }}">ver. {{ ver.version }}</p>
 </div>
 
-<details id="author">
+<details class="author">
     <summary>
         &copy; &#9773; Fadeev Artem
     </summary>
     <p>
-        Moscow Russia, 2020
+        Moscow Russia, {{ ver.year }}
     </p>
 </details>
 

@@ -16,10 +16,10 @@ class LinkForm(forms.ModelForm):
         model = Link
         fields = ('category', 'title', 'link', 'image')
         labels = {
-            'category': 'Категория:',
-            'title': 'Имя ресурса:',
-            'link': 'Ссылка на ресурс:',
-            'image': 'Иконка:'
+            'category': 'Category',
+            'title': 'Title',
+            'link': 'Link url',
+            'image': 'Icon'
         }
         widgets = {
             'category': forms.Select(attrs={'class': 'form_field__category'}),
@@ -30,13 +30,31 @@ class LinkForm(forms.ModelForm):
 
 
 class CategoryForm(forms.ModelForm):
-
     class Meta:
         model = Category
         fields = ('name',)
         labels = {
-            'name': 'Название категории'
+            'name': 'Category title'
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form_field__title'}),
+        }
+
+
+class UpdateLinkForm(forms.ModelForm):
+    """Редактирование линки"""
+
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(
+            owner=self.user)
+
+    class Meta:
+        model = Link
+        fields = ('category', 'title', 'link')
+        labels = {
+            'title': 'Имя ресурса:',
+            'link': 'Ссылка на ресурс:',
+            'image': 'Иконка:'
         }

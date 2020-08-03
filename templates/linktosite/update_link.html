@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="form_field">
+        <a href="{% url 'edit_link_view' category_id %}" class="form_field__close"><div class="close"></div></a>
+        <form class="form_field__items" action="{% url 'update_link_view' link_id %}" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit" class="form_field__btn">Change</button>
+        </form>
+    </div>
+
+{% endblock content %}

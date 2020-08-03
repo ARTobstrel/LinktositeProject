@@ -84,3 +84,13 @@ def pre_save_Unlink_slug(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_Unlink_slug, sender=UnauthorizedUserLink)
+
+
+class Version(models.Model):
+    """Описание версий приложения. Модель предназанчена только для администрирования"""
+    version = models.CharField('Версия', max_length=5)
+    description = models.TextField('Что нового в версии')
+    year = models.PositiveSmallIntegerField('Текущий год')
+
+    def __str__(self):
+        return self.version
