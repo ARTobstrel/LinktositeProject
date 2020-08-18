@@ -23,8 +23,8 @@ class LinkForm(forms.ModelForm):
         }
         widgets = {
             'category': forms.Select(attrs={'class': 'form_field__category'}),
-            'title': forms.TextInput(attrs={'class': 'form_field__title'}),
-            'link': forms.TextInput(attrs={'class': 'form_field__link'}),
+            'title': forms.TextInput(attrs={'class': 'form_field__name'}),
+            'link': forms.TextInput(attrs={'class': 'form_field__name'}),
             'image': forms.FileInput(attrs={'class': 'form_field__image'}),
         }
 
@@ -37,7 +37,7 @@ class CategoryForm(forms.ModelForm):
             'name': 'Category title'
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form_field__title'}),
+            'name': forms.TextInput(attrs={'class': 'form_field__name'}),
         }
 
 
@@ -57,4 +57,10 @@ class UpdateLinkForm(forms.ModelForm):
             'title': 'Имя ресурса:',
             'link': 'Ссылка на ресурс:',
             'image': 'Иконка:'
+        }
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form_field__category'}),
+            'title': forms.TextInput(attrs={'class': 'form_field__name'}),
+            'link': forms.TextInput(attrs={'class': 'form_field__name'}),
+            'image': forms.FileInput(attrs={'class': 'form_field__image'}),
         }

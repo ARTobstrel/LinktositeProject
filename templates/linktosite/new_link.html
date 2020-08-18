@@ -6,7 +6,7 @@
         <a href="{% url 'main_view' %}" class="form_field__close">
             <div class="close"></div>
         </a>
-        <div class="form_field__category_name">Create new link</div>
+        <div class="form_field__title">Create new link</div>
         <form class="form_field__items" action="{% url 'new_link_view' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}

@@ -4,6 +4,7 @@
 
     <div class="form_field">
         <a href="{% url 'edit_link_view' category_id %}" class="form_field__close"><div class="close"></div></a>
+        <div class="form_field__title">Rename category</div>
         <form class="form_field__items" action="{% url 'rename_cat_view' category_id %}" method="post" enctype="multipart/form-data" >
             {% csrf_token %}
             {{ form }}

@@ -4,49 +4,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LinkToSite</title>
     <link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-<header class="header">
-    <div class='logo'>
-        <a href="{% url 'new_link_view' %}"><h1 class="logo__name">LinkToSite</h1></a>
-        <div class='logo__username'>
+<div class="screen">
+    <header class="header">
+        <div class='logo'>
+            <a href="{% url 'new_link_view' %}"><h1 class="logo__name">LinkToSite</h1></a>
+            <div class='logo__username'>
+                {% if user.is_authenticated %}
+                    {% if user.first_name or user.last_name %}
+                        {% if user.first_name %}<b>{{ user.first_name }}</b>{% endif %}
+                        {% if user.last_name %}<b>{{ user.last_name }}</b>{% endif %}
+                        {{ user.avatar }}
+                    {% else %}
+                        <b>{{ user.username }}</b>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class='usermenu'>
             {% if user.is_authenticated %}
-                <b>{{ user.username }}</b>
+                <a href='{% url "logout" %}' class='username__log'>log out</a>
+            {% else %}
+                <a href='{% url "login" %}' class='username__log'>log in</a>
             {% endif %}
         </div>
+    </header>
+
+    <div class='container'>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% get_version as ver %}
+    <div class="version">
+        <p title="{{ ver.description }}">ver. {{ ver.version }}</p>
     </div>
 
-    <div class='username'>
-        {% if user.is_authenticated %}
-            <a href='{% url "logout" %}' class='username__log'>log out</a>
-        {% else %}
-            <a href='{% url "login" %}' class='username__log'>log in</a>
-            <a href='{% url "register" %}' class='username__log'>register</a>
-        {% endif %}
-    </div>
-</header>
+    <details class="author">
+        <summary>
+            &copy; &#9773; Fadeev Artem
+        </summary>
+        <p>
+            Moscow Russia, {{ ver.year }}
+        </p>
+    </details>
 
-<div class='container'>
-    {% block content %}
-    {% endblock content %}
 </div>
 
-{% get_version as ver %}
-<div class="version">
-    <p title="{{ ver.description }}">ver. {{ ver.version }}</p>
-</div>
-
-<details class="author">
-    <summary>
-        &copy; &#9773; Fadeev Artem
-    </summary>
-    <p>
-        Moscow Russia, {{ ver.year }}
-    </p>
-</details>
 
 </body>
 </html>

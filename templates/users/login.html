@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 {% block content %}
-    
+
     <div class="form_field">
-        <a href="{% url 'main_view' %}" class="form_field__close"><div class="close"></div></a>
+        <a href="{% url 'main_view' %}" class="form_field__close">
+            <div class="close"></div>
+        </a>
+        <div class="form_field__title">Authorization</div>
         <form class="form_field__items" action="{% url 'login' %}" method="post">
             {% csrf_token %}
             {{ form }}
-            <button name="submit" class="form_field__btn">Авторизация</button>
+            <button name="submit" class="form_field__btn">Log in</button>
+            <div class="form_field__auth_footer">
+                <a href='{% url "register" %}' class='username__log'>register</a>
+                <a href='{% provider_login_url "google" %}' class='username__log'>Google log in</a>
+            </div>
             <input type='hidden' name='next' value='{% url "main_view" %}'>
         </form>
     </div>

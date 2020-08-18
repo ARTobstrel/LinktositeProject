@@ -6,7 +6,7 @@
         <a href="{% url 'main_view' %}" class="form_field__close">
             <div class="close"></div>
         </a>
-        <div class="form_field__category_name">{{ category.name }}</div>
+        <div class="form_field__title">{{ category.name }}</div>
         {% for link in category.link_set.all %}
             <div class="form_field__link">
                 <div class="link__size">

@@ -40,6 +40,8 @@ Thumbs.db
 
 .idea/
 venv/
-media/*
+media/
 /*/__pycache__/
 __pycache__/
+
+newversion.txt
