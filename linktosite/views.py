@@ -1,28 +1,35 @@
+import logging
+
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView
-from django.views.generic.edit import UpdateView
 from django.views.generic.base import View
-from django.contrib.auth.decorators import login_required
 
 from linktosite.forms import LinkForm, CategoryForm, UpdateLinkForm
 from linktosite.models import Category, Link, UnauthorizedUserLink
 
 
+logger = logging.getLogger('django')
+
+
 class MainView(ListView):
-    """Вывод всех линков"""
+    """Вывод всех линков. Главный экран"""
 
     model = Category
-    template_name = 'linktosite/main.html'
+    template_name: str = 'linktosite/main.html'
+    logger.info('Hello')
+
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
             queryset = Category.objects.filter(owner=self.request.user)
+
             return queryset.order_by('id')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs) -> dict:
+        context: dict = super().get_context_data(**kwargs)
         context['un_link'] = UnauthorizedUserLink.objects.all()
         return context
 
@@ -30,7 +37,7 @@ class MainView(ListView):
 class NewLinkView(View):
     """Создание новой линки"""
 
-    template_name = 'linktosite/new_link.html'
+    template_name: str = 'linktosite/new_link.html'
 
     def get(self, request):
         form = LinkForm(request.user.id)
@@ -47,11 +54,12 @@ class NewLinkView(View):
 
 class NewCategoryView(View):
     """Создание новой категории"""
+    tempate_name: str = 'linktosite/new_category.html'
 
     def get(self, request):
         form = CategoryForm()
         context = {'form': form}
-        return render(request, 'linktosite/new_category.html', context)
+        return render(request, self.tempate_name, context)
 
     def post(self, request):
         form = CategoryForm(request.POST)
@@ -60,7 +68,7 @@ class NewCategoryView(View):
             new_category.owner = request.user
             new_category.save()
             return HttpResponseRedirect(reverse('new_link_view'))
-        return render(request, 'linktosite/new_category.html', {'form': form})
+        return render(request, self.tempate_name, {'form': form})
 
 
 class EditLinkView(View):
@@ -68,12 +76,12 @@ class EditLinkView(View):
 
     def get(self, request, id):
         category = Category.objects.get(id=id)
-        context = {'category': category}
+        context: dict = {'category': category}
         return render(request, 'linktosite/edit_links.html', context)
 
 
 @login_required
-def delete_link(request, id):
+def delete_link(request, id: int):
     """Удаление линков"""
 
     try:
@@ -86,9 +94,9 @@ def delete_link(request, id):
 
 
 class UpdateLinkView(View):
-    """Создание новой категории"""
+    """Редактирование линки. Редактировать можно всё кроме изображения"""
 
-    template_name = 'linktosite/update_link.html'
+    template_name: str = 'linktosite/update_link.html'
 
     def get(self, request, id):
         link = Link.objects.get(id=id)
@@ -97,7 +105,7 @@ class UpdateLinkView(View):
                    'category_id': link.category.id}
         return render(request, self.template_name, context)
 
-    def post(self, request, id):
+    def post(self, request, id: int):
         link = Link.objects.get(id=id)
         category_id = link.category.id
         form = UpdateLinkForm(request.user.id, request.POST,
@@ -109,7 +117,7 @@ class UpdateLinkView(View):
 
 
 @login_required
-def delete_cat(request, id):
+def delete_cat(request, id: int) -> HttpResponseRedirect:
     """Удаление категорий"""
 
     try:
@@ -121,17 +129,17 @@ def delete_cat(request, id):
 
 
 class RenameCatView(View):
-    """Создание новой категории"""
+    """Переименовывание категории"""
 
-    template_name = 'linktosite/rename_category.html'
+    template_name: str = 'linktosite/rename_category.html'
 
-    def get(self, request, id):
+    def get(self, request, id: int) -> render:
         get_category = Category.objects.get(id=id)
         form = CategoryForm(instance=get_category)
         context = {'form': form, 'category_id': id}
         return render(request, self.template_name, context)
 
-    def post(self, request, id):
+    def post(self, request, id: int):
         get_category = Category.objects.get(id=id)
         form = CategoryForm(request.POST, instance=get_category)
         if form.is_valid():

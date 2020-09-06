@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    """Модель категорий"""
+    """Модель категорий. Название категорий. Это первое, что создает пользователь."""
     name = models.CharField(max_length=25)
     slug = models.SlugField(blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -63,6 +63,7 @@ pre_save.connect(pre_save_link_slug, sender=Link)
 
 
 class UnauthorizedUserLink(models.Model):
+    """Линки для неавторизованного пользователя. Их может добавлять, удалять и редактировать только админ"""
     title = models.CharField('Name', max_length=25)
     slug = models.SlugField(blank=True)
     link = models.CharField(max_length=100)
