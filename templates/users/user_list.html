@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+
+    <div class="form_field">
+        <a href="{% url 'main_view' %}" class="form_field__close">
+            <div class="close"></div>
+        </a>
+        <div class="form_field__title">List users</div>
+        {% for user in users %}
+            <div class="form_field__link jcfs">
+                <div class="col_width33">
+                    <span class="font_size22">
+                        {{ user.pk }}:
+                        {% if user.first_name or user.last_name %} {{ user.first_name }} {{ user.last_name }}
+                        {% else %}
+                        {{ user.username }}
+                        {% endif %}
+                    </span>
+                </div>
+                <span class="font_size14 col_width33">
+                    {{ user.date_joined.date.day }}.{{ user.date_joined.date.month }}.{{user.date_joined.date.year }}
+                </span>
+                {% if not user.is_superuser %}
+                    <span class="delete_btn font_size14"><a href="{% url 'delete_user' user.id %}">Delete</a></span>
+                {% else %}
+                    <i class="font_size14">superuser</i>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form_field__category_footer"></div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+<div class='usermenu'>
+    {% if user.is_superuser %}
+        <div class="usermenu_elem">
+            <a href="{% url 'admin:index' %}" class="btn admin_btn">Admin panel</a>
+            <a href="{% url 'user_list' %}" class="btn admin_btn">Users</a>
+        </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <div class="usermenu_elem">
+            <a href="{% url 'new_category_view' %}?next={{ request.path }}" class="btn user_btn">create category</a>
+            <a href="{% url 'new_link_view' %}" class="btn user_btn">create link</a>
+        </div>
+        <div class="usermenu_elem">
+            <a href='{% url "logout" %}' class='btn auth_btn'>log out</a>
+    {% else %}
+            <a href='{% url "login" %}' class="btn auth_btn">log in</a>
+            <a href='{% url "register" %}' class='btn auth_btn'>rigister</a>
+        </div>
+    {% endif %}
+</div>

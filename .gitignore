@@ -38,10 +38,10 @@ ehthumbs.db
 Thumbs.db
 
 
-.idea
+.idea/
 .env
 venv
-media
+media/
 /*/__pycache__/
 __pycache__/
 

@@ -15,33 +15,28 @@
 <div class="screen">
     <header class="header">
         <div class='logo'>
-            <a href="{% url 'new_link_view' %}"><h1 class="logo__name">LinkToSite</h1></a>
+            <a href="{% url 'main_view' %}"><h1 class="logo__name">LinkToSite</h1></a>
             <div class='logo__username'>
                 {% if user.is_authenticated %}
                     {% if user.first_name or user.last_name %}
-                        {% if user.first_name %}<b>{{ user.first_name }}</b>{% endif %}
-                        {% if user.last_name %}<b>{{ user.last_name }}</b>{% endif %}
-                        {{ user.avatar }}
+                        {% if user.first_name %}<b class="{% if user.is_superuser %}admin_color{% endif %}">{{ user.first_name }}</b>{% endif %}
+                        {% if user.last_name %}<b class="{% if user.is_superuser %}admin_color{% endif %}">{{ user.last_name }}</b>{% endif %}
                     {% else %}
-                        <b>{{ user.username }}</b>
+                        <b class="{% if user.is_superuser %}admin_color{% endif %}">{{ user.username }}</b>
                     {% endif %}
                 {% endif %}
             </div>
         </div>
 
-        <div class='usermenu'>
-            {% if user.is_authenticated %}
-                <a href='{% url "logout" %}' class='username__log'>log out</a>
-            {% else %}
-                <a href='{% url "login" %}' class='username__log'>log in</a>
-            {% endif %}
-        </div>
+
     </header>
 
     <div class='container'>
         {% block content %}
         {% endblock content %}
     </div>
+
+
     {% get_version as ver %}
     <div class="version">
         <p title="{{ ver.description }}">ver. {{ ver.version }} beta</p>

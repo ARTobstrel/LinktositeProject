@@ -8,7 +8,9 @@ from linktosite.views import NewLinkView, \
     delete_link, \
     delete_cat, \
     UpdateLinkView, \
-    RenameCatView
+    RenameCatView, \
+    UserListView, \
+    delete_user
 
 urlpatterns = [
     path('new_link/', login_required(NewLinkView.as_view()), name='new_link_view'),
@@ -23,5 +25,8 @@ urlpatterns = [
          name='delete_cat'),
     path('rename_cat/<int:id>/',
          login_required(RenameCatView.as_view()), name='rename_cat_view'),
+    path('user_list/', login_required(UserListView.as_view()),
+         name='user_list'),
+    path('delete_user/<int:id>', delete_user, name='delete_user'),
     path('', MainView.as_view(), name='main_view'),
 ]

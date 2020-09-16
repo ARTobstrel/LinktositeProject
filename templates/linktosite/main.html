@@ -3,13 +3,14 @@
 {% block content %}
 
     <div class='main_frame'>
-{#        Если пользователь авторизован, то выводим его линки#}
+        {#        Если пользователь авторизован, то выводим его линки#}
         {% if user.is_authenticated %}
-{#            Проверяем есть ли у авторизованного пользователя созданные категории#}
+            {#            Проверяем есть ли у авторизованного пользователя созданные категории#}
             {% if category_list %}
                 {% for category in category_list %}
                     <div class="cat_frame">
-                        <div class="cat_title"><a href="{% url 'edit_link_view' category.id %}">{{ category.name }}</a></div>
+                        <div class="cat_title"><a href="{% url 'edit_link_view' category.id %}">{{ category.name }}</a>
+                        </div>
                         {% for link in category.link_set.all %}
                             <div class="link"><a href="{{ link.link }}" target="_blank">{% if link.image %}
                                 <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
@@ -18,9 +19,8 @@
                 {% endfor %}
             {% else %} {# если еще нет категорий #}
                 <div class='form_field'>
-                    <p class="form_field__items">У вас нет ни одной категории. Для создания категории нажмите <a class='link_to_next'
-                                                                                           href='{% url 'new_category_view' %}'>здесь.</a>
-                    </p>
+                    <p class="form_field__items">У вас нет ни одной категории. Для создания категории нажмите 'create
+                        category'</p>
                 </div>
             {% endif %}
         {% else %}
@@ -33,5 +33,7 @@
             </div>
         {% endif %}
     </div>
+
+    {% include 'include/usermenu.html' %}
 
 {% endblock content %}

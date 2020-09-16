@@ -1,6 +1,7 @@
 import logging
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -10,7 +11,6 @@ from django.views.generic.base import View
 from linktosite.forms import LinkForm, CategoryForm, UpdateLinkForm
 from linktosite.models import Category, Link, UnauthorizedUserLink
 
-
 logger = logging.getLogger('django')
 
 
@@ -19,8 +19,7 @@ class MainView(ListView):
 
     model = Category
     template_name: str = 'linktosite/main.html'
-    logger.info('Hello')
-
+    logger.info('Its working')
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -63,11 +62,13 @@ class NewCategoryView(View):
 
     def post(self, request):
         form = CategoryForm(request.POST)
+        next = request.POST.get('next', '/')
         if form.is_valid():
             new_category = form.save(commit=False)
             new_category.owner = request.user
             new_category.save()
-            return HttpResponseRedirect(reverse('new_link_view'))
+            return HttpResponseRedirect(next)
+
         return render(request, self.tempate_name, {'form': form})
 
 
@@ -146,3 +147,27 @@ class RenameCatView(View):
             form.save()
             return HttpResponseRedirect(reverse('edit_link_view', args=(get_category.id,)))
         return render(request, self.template_name, {'form': form, 'category_id': id})
+
+
+class UserListView(ListView):
+    """Вывод всех пользователей"""
+
+    model = User
+    context_object_name = 'users'
+    template_name = 'users/user_list.html'
+    ordering = 'id'
+
+
+@login_required
+def delete_user(request, id: int) -> HttpResponseRedirect:
+    """Удаление пользователей"""
+
+    if request.user.is_superuser:
+        try:
+            user = User.objects.get(id=id)
+            user.delete()
+            return HttpResponseRedirect(reverse('user_list'))
+        except user.DoesNotExist:
+            return HttpResponseRedirect("/")
+    else:
+        return HttpResponseRedirect("/")

@@ -8,7 +8,7 @@
         </a>
         <div class="form_field__title">{{ category.name }}</div>
         {% for link in category.link_set.all %}
-            <div class="form_field__link">
+            <div class="form_field__link jcsb">
                 <div class="link__size">
                     <div class="link"><a href="{{ link.link }}" target="_blank">{% if link.image %}
                         <img src="{{ link.image.url }}" alt="">{% endif %}<p>{{ link.title }}</p></a></div>
