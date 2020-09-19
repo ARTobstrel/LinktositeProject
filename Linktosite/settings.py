@@ -61,12 +61,6 @@ WSGI_APPLICATION = 'Linktosite.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'adminificator$linktosite',
-        # 'USER': 'adminificator',
-        # 'PASSWORD': 'artem250482',
-        # 'HOST': 'adminificator.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
-        # 'PORT': '3306',
         'ENGINE': config('ENGINE'),
         'NAME': config('NAME'),
         'USER': config('USER'),
